@@ -6,15 +6,6 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCunAsWIHvjbym2LSyaUGxCTUVPph_4Guk",
-  authDomain: "food-trivia-1890f.firebaseapp.com",
-  projectId: "food-trivia-1890f",
-  storageBucket: "food-trivia-1890f.firebasestorage.app",
-  messagingSenderId: "989485521019",
-  appId: "1:989485521019:web:031348bb9b0cf884c06ade",
-  measurementId: "G-JKLSC66HWF",
-};
 
 // Initialize Firebase
 // const app = initializeApp(firebaseConfig);
