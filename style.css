@@ -1,0 +1,544 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(
+    135deg,
+    #ffd166,
+    #ef476f
+  ); /* Sunglow Yellow to Paradise Pink */
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden; /* Prevent horizontal scroll with sidebar */
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px; /* Max width for larger screens */
+  min-height: 95vh;
+  background-color: #f8f9fa; /* Light background for content */
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden; /* Keep content within rounded borders */
+}
+
+/* Leaderboard Sidebar */
+.leaderboard {
+  width: 280px;
+  background-color: #118ab2; /* Blue NCS */
+  color: #fff;
+  padding: 20px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  transition: transform 0.3s ease-in-out;
+  position: relative; /* Needed for absolute positioning of button */
+  z-index: 10;
+}
+
+.leaderboard.collapsed {
+  transform: translateX(-100%);
+}
+
+.leaderboard h2 {
+  font-family: "Fredoka One", cursive;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffd166; /* Sunglow Yellow */
+}
+
+.leaderboard h2 .fa-trophy {
+  margin-right: 8px;
+}
+
+#leaderboard-list {
+  list-style: none;
+  padding: 0;
+  max-height: calc(95vh - 120px); /* Adjust based on padding and title height */
+  overflow-y: auto;
+}
+
+#leaderboard-list li {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95em;
+  transition: background-color 0.2s ease;
+}
+
+#leaderboard-list li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#leaderboard-list li.current-player {
+  background-color: #ffd166; /* Highlight current player */
+  color: #333;
+  font-weight: bold;
+}
+
+.leaderboard-rank {
+  font-weight: bold;
+  margin-right: 10px;
+  min-width: 20px; /* Ensure alignment */
+  text-align: right;
+}
+
+.leaderboard-name {
+  flex-grow: 1;
+  margin-right: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.leaderboard-score {
+  font-weight: bold;
+}
+
+/* Toggle Button for Leaderboard */
+.toggle-leaderboard-btn {
+  position: absolute;
+  top: 50%;
+  right: -30px; /* Position outside the sidebar */
+  transform: translateY(-50%);
+  background-color: #118ab2;
+  color: #fff;
+  border: none;
+  padding: 15px 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+}
+
+.toggle-leaderboard-btn:hover {
+  background-color: #0a6c8a;
+}
+
+.leaderboard.collapsed .toggle-leaderboard-btn i {
+  transform: scaleX(-1); /* Flip arrow */
+}
+
+/* Main Content Area */
+#main-content {
+  flex-grow: 1;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  max-height: 95vh;
+}
+
+/* Screen Visibility */
+.screen {
+  display: none; /* Hide screens by default */
+  width: 100%;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.screen.active {
+  display: block; /* Show active screen */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Welcome Screen */
+#welcome-screen .game-title {
+  font-family: "Fredoka One", cursive;
+  color: #ef476f; /* Paradise Pink */
+  font-size: 2.8em;
+  margin-bottom: 20px;
+}
+
+#welcome-screen .rules {
+  font-size: 1.1em;
+  margin-bottom: 25px;
+  color: #555;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#player-name {
+  display: block;
+  width: 80%;
+  max-width: 350px;
+  padding: 12px 15px;
+  margin: 0 auto 20px auto;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  font-size: 1em;
+  text-align: center;
+}
+
+#player-name:focus {
+  outline: none;
+  border-color: #118ab2;
+  box-shadow: 0 0 5px rgba(17, 138, 178, 0.3);
+}
+
+/* Buttons */
+.btn {
+  padding: 12px 25px;
+  font-size: 1.1em;
+  font-weight: 600;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 5px;
+}
+
+.btn i {
+  margin-left: 8px;
+}
+
+.btn-start {
+  background-color: #06d6a0; /* Caribbean Green */
+  color: #fff;
+}
+
+.btn-start:hover {
+  background-color: #05b386;
+  transform: translateY(-2px);
+}
+
+/* Game Screen */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding: 10px;
+  background-color: #eee;
+  border-radius: 8px;
+}
+
+#player-info {
+  font-size: 1em;
+  font-weight: 600;
+}
+
+#timer {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #ef476f; /* Paradise Pink */
+  background-color: #fff;
+  padding: 5px 15px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#timer .fa-clock {
+  margin-right: 5px;
+}
+
+#question-container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
+#question-number {
+  font-size: 0.9em;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+#question-text {
+  font-size: 1.4em;
+  font-weight: 600;
+  margin-bottom: 25px;
+  min-height: 60px; /* Prevent layout shifts */
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two columns */
+  gap: 15px;
+}
+
+.option-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  font-size: 1em;
+  background-color: #118ab2; /* Blue NCS */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  text-align: center;
+}
+
+.option-btn:hover:not(:disabled) {
+  background-color: #0f7a9b;
+  transform: scale(1.02);
+}
+
+.option-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.option-btn.correct {
+  background-color: #06d6a0 !important; /* Caribbean Green */
+  color: #fff !important;
+  animation: pulse 0.5s;
+}
+
+.option-btn.incorrect {
+  background-color: #ef476f !important; /* Paradise Pink */
+  color: #fff !important;
+  opacity: 0.8;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Feedback Area */
+.feedback {
+  margin-top: 15px;
+  min-height: 60px; /* Prevent layout shift */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#feedback-icon {
+  font-size: 2.5em;
+  margin-bottom: 5px;
+}
+
+#feedback-icon .fa-check-circle {
+  color: #06d6a0;
+}
+
+#feedback-icon .fa-times-circle {
+  color: #ef476f;
+}
+
+#feedback-text {
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+/* Bonus Fact Screen */
+.bonus-screen {
+  background-color: #ffd166; /* Sunglow Yellow */
+  padding: 40px;
+  border-radius: 15px;
+  color: #333;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bonus-screen h2 {
+  font-family: "Fredoka One", cursive;
+  color: #118ab2; /* Blue NCS */
+  margin-bottom: 15px;
+}
+
+#food-fact-text {
+  font-size: 1.3em;
+  margin-bottom: 25px;
+  font-style: italic;
+}
+
+#continue-to-bonus-question {
+  background-color: #ef476f; /* Paradise Pink */
+  color: #fff;
+}
+#continue-to-bonus-question:hover {
+  background-color: #d93a5f;
+}
+
+/* Game Over Screen */
+#game-over-screen h2 {
+  font-family: "Fredoka One", cursive;
+  color: #06d6a0; /* Caribbean Green */
+  font-size: 2.5em;
+  margin-bottom: 15px;
+}
+
+#game-over-screen p {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+#final-score,
+#final-rank {
+  font-weight: bold;
+  font-size: 1.3em;
+  color: #ef476f;
+}
+
+#play-again-button {
+  background-color: #118ab2; /* Blue NCS */
+  color: #fff;
+  margin-top: 20px;
+}
+
+#play-again-button:hover {
+  background-color: #0f7a9b;
+}
+
+/* Responsive Design */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  .leaderboard {
+    width: 100%;
+    border-radius: 0;
+    position: fixed; /* Make it fixed for toggle effect */
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-100%); /* Initially hidden */
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+    padding-top: 60px; /* Space for toggle button */
+  }
+
+  .leaderboard.open {
+    transform: translateX(0);
+  }
+
+  .toggle-leaderboard-btn {
+    position: fixed; /* Fixed position relative to viewport */
+    top: 15px;
+    left: 15px; /* Position inside the viewport when collapsed */
+    right: auto;
+    transform: none;
+    z-index: 20;
+    background-color: #ffd166;
+    color: #333;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Change icon when sidebar is open */
+  .leaderboard.open + #main-content .toggle-leaderboard-btn i {
+    display: none; /* Hide the default toggle */
+  }
+
+  .leaderboard.open .toggle-leaderboard-btn {
+    /* Style for the button when the sidebar is open (optional) */
+    left: 235px; /* Adjust based on sidebar width */
+    background-color: #fff;
+    color: #118ab2;
+  }
+  .leaderboard.open .toggle-leaderboard-btn i {
+    transform: scaleX(-1); /* Flip arrow */
+  }
+
+  #main-content {
+    padding: 20px 15px;
+    padding-top: 70px; /* Add padding to avoid overlap with fixed button */
+    max-height: none;
+    min-height: 100vh;
+  }
+
+  #welcome-screen .game-title {
+    font-size: 2.2em;
+  }
+
+  .options {
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+  }
+
+  #question-text {
+    font-size: 1.3em;
+  }
+
+  .option-btn {
+    padding: 12px;
+    font-size: 0.95em;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  #welcome-screen .game-title {
+    font-size: 1.8em;
+  }
+  #welcome-screen .rules {
+    font-size: 1em;
+  }
+  .game-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  #timer {
+    align-self: flex-end;
+  }
+  #question-container {
+    padding: 20px;
+  }
+  #question-text {
+    font-size: 1.2em;
+  }
+  .btn {
+    padding: 10px 20px;
+    font-size: 1em;
+  }
+  .leaderboard {
+    width: 250px; /* Slightly narrower for mobile */
+  }
+  .leaderboard.open .toggle-leaderboard-btn {
+    left: 215px; /* Adjust based on sidebar width */
+  }
+}

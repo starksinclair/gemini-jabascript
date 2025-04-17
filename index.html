@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foodie Trivia Challenge</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Firebase App (required) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Leaderboard Sidebar -->
+      <div id="leaderboard-container" class="leaderboard">
+        <h2><i class="fas fa-trophy"></i> Leaderboard</h2>
+        <ul id="leaderboard-list"></ul>
+        <button id="toggle-leaderboard" class="toggle-leaderboard-btn">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      </div>
+
+      <!-- Main Content Area -->
+      <div id="main-content">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="screen active">
+          <h1 class="game-title">
+            <i class="fas fa-utensils"></i> Foodie Trivia Challenge!
+            <i class="fas fa-pepper-hot"></i>
+          </h1>
+          <p class="rules">
+            Get ready for a yummy challenge! Answer 10 food-related questions.
+            Answer fast for bonus points! Watch out for the Food Fact Bonus
+            Rounds!
+          </p>
+          <input
+            type="text"
+            id="player-name"
+            placeholder="Enter your Chef Name"
+          />
+          <button id="start-button" class="btn btn-start">
+            Start Game <i class="fas fa-play"></i>
+          </button>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+          <div class="game-header">
+            <div id="player-info">
+              <span id="current-player-name">Player</span>:
+              <span id="current-score">0</span> pts
+            </div>
+            <div id="timer">
+              <i class="fas fa-clock"></i> <span id="time-left">20</span>s
+            </div>
+          </div>
+          <div id="question-container">
+            <p id="question-number">Question 1/10</p>
+            <h2 id="question-text">Question text goes here...</h2>
+            <div id="options-container" class="options">
+              <!-- Options will be dynamically added -->
+            </div>
+          </div>
+          <div id="feedback" class="feedback">
+            <span id="feedback-icon"></span>
+            <p id="feedback-text"></p>
+          </div>
+        </div>
+
+        <!-- Bonus Fact Screen -->
+        <div id="bonus-fact-screen" class="screen bonus-screen">
+          <h2><i class="fas fa-lightbulb"></i> Food Fact Bonus Round!</h2>
+          <p id="food-fact-text">Did you know...?</p>
+          <button id="continue-to-bonus-question" class="btn">
+            Continue to Bonus Question <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" class="screen">
+          <h2><i class="fas fa-flag-checkered"></i> Game Over!</h2>
+          <p id="final-message">Well Done!</p>
+          <p>Your Final Score: <span id="final-score">0</span></p>
+          <p>Your Final Rank: <span id="final-rank">N/A</span></p>
+          <button id="play-again-button" class="btn">
+            Play Again <i class="fas fa-redo"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="script.js" type="module"></script>
+  </body>
+</html>

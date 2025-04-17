@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Waiting Room - Foodie Trivia</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f0f0f0; /* Similar background */
+        font-family: "Poppins", sans-serif;
+        color: #333;
+      }
+      .waiting-container {
+        text-align: center;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      .loading-icon {
+        font-size: 4rem;
+        color: #ff6347; /* Tomato color */
+        margin-bottom: 20px;
+        animation: spin 2s linear infinite;
+      }
+      h1 {
+        font-family: "Fredoka One", cursive;
+        color: #ff6347;
+        margin-bottom: 15px;
+      }
+      p {
+        font-size: 1.1rem;
+        color: #555;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="waiting-container">
+      <div class="loading-icon">
+        <i class="fas fa-utensils"></i>
+        <!-- Or fa-spinner, fa-pizza-slice, etc. -->
+      </div>
+      <h1>Waiting Room</h1>
+      <p>Waiting for the game to start...</p>
+      <p>
+        Your Chef Name: <strong id="display-player-name">Loading...</strong>
+      </p>
+    </div>
+
+    <!-- Include script.js to handle the waiting logic -->
+    <script src="script.js"></script>
+  </body>
+</html>
